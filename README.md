@@ -8,4 +8,4 @@
 
 ### `npm run build`
 
-## Demo: [minesweeper]()
+## Demo: [minesweeper](https://react-minesweeper-ts.netlify.app/)
