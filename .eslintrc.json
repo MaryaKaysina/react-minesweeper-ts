@@ -15,6 +15,10 @@
     ],
     "react/self-closing-comp": "off",
     "arrow-body-style": "off",
-    "no-undef": "off"
+    "no-undef": "off",
+    "no-unused-vars": "off",
+    "no-plusplus": "off",
+    "import/prefer-default-export": "off",
+    "react/no-array-index-key": "off"
   }
 }

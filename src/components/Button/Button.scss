@@ -1,0 +1,7 @@
+@import "../../styles/mixins.scss";
+
+.Button {
+  @include borders(#fff, #999);
+  width: 30px;
+  height: 30px;
+}
