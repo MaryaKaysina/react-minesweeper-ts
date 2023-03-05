@@ -45,6 +45,9 @@
   background-position: -150px -90px;
   background-repeat: no-repeat;
   background-size: 868%;
+  &--red {
+    background-position: -179px -90px;
+  }
 }
 
 .Flag {
@@ -52,6 +55,15 @@
   height: 100%;
   background: url(./../minesweeper-sprites.png);
   background-position: -51px -76px;
+  background-repeat: no-repeat;
+  background-size: 868%;
+}
+
+.Find {
+  width: 100%;
+  height: 100%;
+  background: url(./../minesweeper-sprites.png);
+  background-position: -180px -78px;
   background-repeat: no-repeat;
   background-size: 868%;
 }

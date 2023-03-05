@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { COUNT_BOMBS, TIME_OF_MINUTES } from '../../constans';
+import { COUNT_BOMBS, MAX_COLUMNS, MAX_ROWS, TIME_OF_MINUTES } from '../../constans';
 import { CellState, CellType, CellValue, Face } from '../../types';
 import { generateCells, openMultipleCells } from '../../utils';
 import Button from '../Button';
@@ -48,6 +48,36 @@ const App = () => {
     return () => {};
   }, [live, timerSeconds]);
 
+  useEffect(() => {
+    if (hasLost) {
+      setFace(Face.lost);
+      setLive(false);
+    }
+  }, [hasLost]);
+
+  useEffect(() => {
+    if (hasWon) {
+      setFace(Face.won);
+      setLive(false);
+    }
+  }, [hasWon]);
+
+  const showAllBombs = (): CellType[][] => {
+    const currentCells = cells.slice();
+    return currentCells.map(row =>
+      row.map(cell => {
+        if (cell.value === CellValue.bomb) {
+          return {
+            ...cell,
+            state: CellState.visible
+          };
+        }
+
+        return cell;
+      })
+    );
+  };
+
   const handleCellClick = (rowParam: number, colParam: number) => () => {
     let newCells = cells.slice();
 
@@ -71,16 +101,47 @@ const App = () => {
 
     if (currentCell.value === CellValue.bomb) {
       setHasLost(true);
-      // newCells[rowParam][colParam].red = true;
-      // newCells = showAllBombs();
+      newCells[rowParam][colParam].red = true;
+      newCells = showAllBombs();
       setCells(newCells);
       return;
     } else if (currentCell.value === CellValue.none) {
       newCells = openMultipleCells(newCells, rowParam, colParam);
     } else {
       newCells[rowParam][colParam].state = CellState.visible;
-      setCells(newCells);
     }
+
+    let safeOpenCellsExists = false;
+    for (let row = 0; row < MAX_ROWS; row++) {
+      for (let col = 0; col < MAX_COLUMNS; col++) {
+        const current = newCells[row][col];
+
+        if (
+          current.value !== CellValue.bomb &&
+          current.state === CellState.open
+        ) {
+          safeOpenCellsExists = true;
+          break;
+        }
+      }
+    }
+
+    if (!safeOpenCellsExists) {
+      newCells = newCells.map(row =>
+        row.map(cell => {
+          if (cell.value === CellValue.bomb) {
+            return {
+              ...cell,
+              state: CellState.find
+            };
+          }
+          return cell;
+        })
+      );
+      setHasWon(true);
+    }
+
+    setCells(newCells);
 
   };
 
@@ -107,12 +168,12 @@ const App = () => {
   };
 
   const handleFaceClick = () => {
-    if (live) {
-      setLive(false);
-      setTimerMinutes(TIME_OF_MINUTES * 60);
-      setTimerSeconds(0);
-      setCells(generateCells());
-    }
+    setLive(false);
+    setTimerMinutes(TIME_OF_MINUTES * 60);
+    setTimerSeconds(0);
+    setCells(generateCells());
+    setHasLost(false);
+    setHasWon(false);
   }
 
   const renderCells = (): React.ReactNode => {
@@ -125,6 +186,7 @@ const App = () => {
             col={colIndex}
             state={cell.state}
             value={cell.value}
+            red={cell.red}
             onClick={handleCellClick}
             onContext={handleCellContext}
           />

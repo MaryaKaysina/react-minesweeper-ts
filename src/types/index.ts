@@ -14,12 +14,14 @@ export enum CellValue {
 export enum CellState {
   open,
   visible,
-  flagged
+  flagged,
+  find
 };
 
 export type CellType = {
   value: CellValue,
-  state: CellState
+  state: CellState,
+  red?: boolean,
 };
 
 export enum Face {
