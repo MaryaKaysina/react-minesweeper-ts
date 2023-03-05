@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { COUNT_BOMBS, TIME_OF_MINUTES } from '../../constans';
-import { CellState, CellType, Face } from '../../types';
-import { generateCells } from '../../utils';
+import { CellState, CellType, CellValue, Face } from '../../types';
+import { generateCells, openMultipleCells } from '../../utils';
 import Button from '../Button';
 import NumberDisplay from '../NumberDisplay';
 import './App.scss';
@@ -13,6 +13,8 @@ const App = () => {
   const [timerSeconds, setTimerSeconds] = useState<number>(0);
   const [bombCounter, setBombCounter] = useState<number>(COUNT_BOMBS);
   const [live, setLive] = useState<boolean>(false);
+  const [hasLost, setHasLost] = useState<boolean>(false);
+  const [hasWon, setHasWon] = useState<boolean>(false);
 
   useEffect(() => {
     const table = document.querySelector('.Body');
@@ -47,7 +49,39 @@ const App = () => {
   }, [live, timerSeconds]);
 
   const handleCellClick = (rowParam: number, colParam: number) => () => {
-    if (!live) setLive(true);
+    let newCells = cells.slice();
+
+    if (!live) {
+      let isABomb = newCells[rowParam][colParam].value === CellValue.bomb;
+      while (isABomb) {
+        newCells = generateCells();
+        if (newCells[rowParam][colParam].value !== CellValue.bomb) {
+          isABomb = false;
+          break;
+        }
+      }
+      setLive(true);
+    }
+
+    const currentCell = cells[rowParam][colParam];
+
+    if ([CellState.flagged, CellState.visible].includes(currentCell.state)) {
+      return;
+    }
+
+    if (currentCell.value === CellValue.bomb) {
+      setHasLost(true);
+      // newCells[rowParam][colParam].red = true;
+      // newCells = showAllBombs();
+      setCells(newCells);
+      return;
+    } else if (currentCell.value === CellValue.none) {
+      newCells = openMultipleCells(newCells, rowParam, colParam);
+    } else {
+      newCells[rowParam][colParam].state = CellState.visible;
+      setCells(newCells);
+    }
+
   };
 
   const handleCellContext = (rowParam: number, colParam: number) =>
