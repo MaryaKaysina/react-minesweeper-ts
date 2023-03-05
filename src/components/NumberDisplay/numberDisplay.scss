@@ -1,9 +1,45 @@
+@import "../../styles/mixins.scss";
+
 .NumberDisplay {
   width: 80px;
   height: 48px;
-  color: #ff0701;
+  // color: #ff0701;
   background: #000;
-  text-align: center;
-  font-size: 40px;
-  line-height: 48px;
+  // text-align: center;
+  // font-size: 40px;
+  // line-height: 48px;
+  & > div {
+    display: inline-block;
+  }
+}
+
+.num-0 {
+  @include time (-256px, 1px);
+}
+.num-1 {
+  @include time (-1px, 1px);
+}
+.num-2 {
+  @include time (-28px, 1px);
+}
+.num-3 {
+  @include time (-57px, 1px);
+}
+.num-4 {
+  @include time (-85px, 1px);
+}
+.num-5 {
+  @include time (-113px, 1px);
+}
+.num-6 {
+  @include time (-142px, 1px);
+}
+.num-7 {
+  @include time (-171px, 1px);
+}
+.num-8 {
+  @include time (-199px, 1px);
+}
+.num-9 {
+  @include time (-227px, 1px);
 }

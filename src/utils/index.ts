@@ -1,3 +1,4 @@
+import React from 'react';
 import { MAX_ROWS, MAX_COLUMNS, NUMBER_OF_BOMBS } from '../constans';
 import { CellState, CellType, CellValue } from '../types';
 
@@ -54,7 +55,7 @@ export const generateCells = (): CellType[][] => {
     for (let col = 0; col < MAX_COLUMNS; col++) {
       cells[row].push({
         value: CellValue.none,
-        state: CellState.visible, // TODO
+        state: CellState.open
       });
     }
   }

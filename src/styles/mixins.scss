@@ -23,3 +23,12 @@
   background-position: $x $y;
 }
 
+@mixin time ($x, $y) {
+  width: 26px;
+  height: 100%;
+  background: url(./../minesweeper-sprites.png);
+  background-repeat: no-repeat;
+  background-size: 1089%;
+  background-position: $x $y;
+}
+

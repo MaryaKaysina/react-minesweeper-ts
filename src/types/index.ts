@@ -21,3 +21,10 @@ export type CellType = {
   value: CellValue,
   state: CellState
 };
+
+export enum Face {
+  smile,
+  oh,
+  lost,
+  won
+};
