@@ -52,6 +52,7 @@ const App = () => {
     if (hasLost) {
       setFace(Face.lost);
       setLive(false);
+      setBombCounter(COUNT_BOMBS);
     }
   }, [hasLost]);
 
@@ -59,6 +60,7 @@ const App = () => {
     if (hasWon) {
       setFace(Face.won);
       setLive(false);
+      setBombCounter(COUNT_BOMBS);
     }
   }, [hasWon]);
 
@@ -93,7 +95,7 @@ const App = () => {
       setLive(true);
     }
 
-    const currentCell = cells[rowParam][colParam];
+    const currentCell = newCells[rowParam][colParam];
 
     if ([CellState.flagged, CellState.visible].includes(currentCell.state)) {
       return;
@@ -142,7 +144,6 @@ const App = () => {
     }
 
     setCells(newCells);
-
   };
 
   const handleCellContext = (rowParam: number, colParam: number) =>
@@ -174,6 +175,7 @@ const App = () => {
     setCells(generateCells());
     setHasLost(false);
     setHasWon(false);
+    setBombCounter(COUNT_BOMBS);
   }
 
   const renderCells = (): React.ReactNode => {
@@ -189,6 +191,7 @@ const App = () => {
             red={cell.red}
             onClick={handleCellClick}
             onContext={handleCellContext}
+            disabled={hasLost || hasWon}
           />
         );
       });

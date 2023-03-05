@@ -8,11 +8,12 @@ interface IButton {
   state: CellState;
   value: CellValue;
   red?: boolean;
+  disabled?: boolean;
   onClick(rowParam: number, colParam: number): (...args: any[]) => void;
   onContext(rowParam: number, colParam: number): (...args: any[]) => void;
 }
 
-const Button = ({ row, col, onContext, onClick, state, value, red = false }: IButton) => {
+const Button = ({ row, col, onContext, onClick, state, value, red = false, disabled }: IButton) => {
 
   const renderContent = (): React.ReactNode => {
     if (state === CellState.visible) {
@@ -30,13 +31,14 @@ const Button = ({ row, col, onContext, onClick, state, value, red = false }: IBu
   };
 
   return (
-    <div
-      className={`Button ${state === CellState.visible ? 'visible' : ''} value-${value}`}
+    <button
+      className={`Button ${state === CellState.visible ? 'visible' : ''} value-${value} ${disabled ? 'disabled' : ''}`}
       onClick={onClick(row, col)}
       onContextMenu={onContext(row, col)}
+      disabled={disabled}
     >
       {renderContent()}
-    </div>
+    </button>
   );
 };
 

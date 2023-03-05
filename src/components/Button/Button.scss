@@ -1,6 +1,9 @@
 @import "../../styles/mixins.scss";
 
 .Button {
+  padding: 0;
+  background: transparent;
+  border: none;
   @include borders(#fff, #999);
   @include buttons();
   width: 30px;
@@ -34,6 +37,13 @@
     }
     &.value-8 {
       @include number (-210px, -120px);
+    }
+  }
+
+  &.disabled {
+    cursor: auto;
+    &:active {
+      @include borders(#fff, #999);
     }
   }
 }
