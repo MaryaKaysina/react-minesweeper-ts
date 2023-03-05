@@ -2,7 +2,7 @@
   "extends": ["airbnb", "prettier"],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": ["error"],
+    "prettier/prettier": ["warn"],
     "react/jsx-filename-extension": "off",
     "import/no-unresolved": "off",
     "import/extensions": "off",
@@ -19,6 +19,9 @@
     "no-unused-vars": "off",
     "no-plusplus": "off",
     "import/prefer-default-export": "off",
-    "react/no-array-index-key": "off"
+    "react/no-array-index-key": "off",
+    "no-continue": "off",
+    "no-restricted-globals": "off",
+    "no-else-return": "off"
   }
 }

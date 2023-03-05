@@ -1,5 +1,5 @@
-@mixin borders($left-top: #7b7b7b, $right-bottom: #fff)  {
-  border-width: 4px;
+@mixin borders ($left-top: #7b7b7b, $right-bottom: #fff) {
+  border-width: 3px;
   border-style: solid;
   border-right-color: $right-bottom;
   border-bottom-color: $right-bottom;
@@ -7,6 +7,19 @@
   border-top-color: $left-top;
 }
 
-@mixin button  {
-
+@mixin buttons ($left-top: #7b7b7b, $right-bottom: #fff) {
+  &:active {
+    border-right-color: $right-bottom;
+    border-bottom-color: $right-bottom;
+    border-left-color: $left-top;
+    border-top-color: $left-top;
+  }
 }
+
+@mixin number ($x, $y) {
+  background: url(./../minesweeper-sprites.png);
+  background-repeat: no-repeat;
+  background-size: 868%;
+  background-position: $x $y;
+}
+

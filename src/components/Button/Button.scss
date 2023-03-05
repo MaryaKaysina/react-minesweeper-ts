@@ -2,6 +2,55 @@
 
 .Button {
   @include borders(#fff, #999);
+  @include buttons();
   width: 30px;
   height: 30px;
+  cursor: pointer;
+
+  &.visible {
+    border-color: #7b7b7b;
+    border-width: 1px;
+  }
+  &.value-1 {
+    @include number (-1px, -120px);
+  }
+  &.value-2 {
+    @include number (-31px, -120px);
+  }
+  &.value-3 {
+    @include number (-61px, -120px);
+  }
+  &.value-4 {
+    @include number (-91px, -120px);
+  }
+  &.value-5 {
+    @include number (-120px, -120px);
+  }
+  &.value-6 {
+    @include number (-150px, -120px);
+  }
+  &.value-7 {
+    @include number (-180px, -120px);
+  }
+  &.value-8 {
+    @include number (-210px, -120px);
+  }
+}
+
+.Bomb {
+  width: 100%;
+  height: 100%;
+  background: url(./../minesweeper-sprites.png);
+  background-position: -150px -90px;
+  background-repeat: no-repeat;
+  background-size: 868%;
+}
+
+.Flag {
+  width: 100%;
+  height: 100%;
+  background: url(./../minesweeper-sprites.png);
+  background-position: -58px -90px;
+  background-repeat: no-repeat;
+  background-size: 868%;
 }
