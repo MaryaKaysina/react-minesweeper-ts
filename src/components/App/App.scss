@@ -1,0 +1,48 @@
+.App {
+  padding: 16px;
+  background: #c2c2c2;
+  border-width: 4px;
+  border-style: solid;
+  border-right-color: #999;
+  border-bottom-color: #999;
+  border-left-color: #fff;
+  border-top-color: #fff;
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  background: #c0c0c0;
+  border-width: 4px;
+  border-style: solid;
+  border-right-color: #fff;
+  border-bottom-color: #fff;
+  border-left-color: #7b7b7b;
+  border-top-color: #7b7b7b;
+}
+
+.Body {
+  display: grid;
+  grid-template-rows: repeat(9, 1fr);
+  grid-template-columns: repeat(9, 1fr);
+  background: #c0c0c0;
+  border-width: 4px;
+  border-style: solid;
+  border-right-color: #fff;
+  border-bottom-color: #fff;
+  border-left-color: #7b7b7b;
+  border-top-color: #7b7b7b;
+}
+
+.Face {
+  width: 48px;
+  height: 48px;
+  background: url(./../minesweeper-sprites.png);
+  background-position: 0 -46px;
+  background-repeat: no-repeat;
+  background-size: 540%;
+  cursor: pointer;
+}
